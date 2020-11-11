@@ -6,11 +6,11 @@ module.exports = function(homebridge) {
   Service = homebridge.hap.Service;
   Characteristic = homebridge.hap.Characteristic;
   HomebridgeAPI = homebridge;
-  homebridge.registerAccessory("homebridge-dummy", "DummySwitch", DummySwitch);
+  homebridge.registerAccessory("homebridge-contact", "contactSwitch", contactSwitch);
 };
 
 
-function DummySwitch(log, config) {
+function contactSwitch(log, config) {
   this.log = log;
   this.name = config.name;
   this.stateful = config.stateful;
@@ -52,7 +52,7 @@ function DummySwitch(log, config) {
   }
 }
 
-DummySwitch.prototype.getServices = function() {
+ContactSwitch.prototype.getServices = function() {
   if (this.contact) {
     return [this._service, this._contact];
   } else {
@@ -60,7 +60,7 @@ DummySwitch.prototype.getServices = function() {
   }
 };
 
-DummySwitch.prototype._setOn = function(on, callback, context) {
+ContactSwitch.prototype._setOn = function(on, callback, context) {
   this.log("Setting switch to " + on);
 
   if (this.contact) {
